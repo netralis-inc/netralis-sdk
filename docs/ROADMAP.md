@@ -7,14 +7,13 @@ and is updated as milestones ship. Dates are targets, not commitments.
 
 ## ✅ Q1 2026 · Done
 
-**Incorporation & Architecture**
+**Architecture & Public API**
 
-- Netralis Inc. incorporated in Canada (Edmonton, Alberta).
 - Hardware abstraction layer designed (uniform sensor / audio /
   display / OTA APIs across ESP32-S3 / C3 / P4).
 - Local-vs-cloud routing protocol designed.
 - MCP-based agent runtime architecture defined.
-- Public SDK API surface drafted (this repository).
+- Public SDK API surface drafted and published (this repository).
 
 ---
 

@@ -82,7 +82,7 @@ The Netralis cloud layer is built end-to-end on Google Cloud:
 
 ## Roadmap
 
-- ✅ **Q1 2026** — Incorporation & architecture
+- ✅ **Q1 2026** — Architecture & public API (HAL, routing protocol, MCP runtime architecture, public SDK headers)
 - 🟣 **Q2 2026** — Private SDK alpha (ESP32-S3 baseline, voice pipeline, MCP runtime stub, OTA over Pub/Sub)
 - ⚪ **Q3 2026** — Developer dev kit + onboarding (open enrollment for the first 50 external developers)
 - ⚪ **Q4 2026** — Public beta (cross-chip support C3 + P4, MCP agent marketplace)
