@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax:
+    name: C++ header syntax check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install g++
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq g++
+
+      - name: Verify g++
+        run: g++ --version
+
+      - name: Syntax-check public header
+        run: |
+          g++ -std=c++17 -Iinclude -fsyntax-only -x c++ \
+              include/netralis/agent.h
+          echo "✓ include/netralis/agent.h parses cleanly"
+
+      - name: Syntax-check example
+        run: |
+          g++ -std=c++17 -Iinclude -fsyntax-only \
+              examples/voice_assistant.cpp
+          echo "✓ examples/voice_assistant.cpp parses cleanly"
+
+  docs:
+    name: Documentation & repo hygiene
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify required files exist
+        run: |
+          set -e
+          for f in README.md LICENSE SECURITY.md CONTRIBUTING.md \
+                   docs/ROADMAP.md .gitignore; do
+            if [ ! -f "$f" ]; then
+              echo "✗ missing: $f"
+              exit 1
+            fi
+            echo "✓ $f"
+          done
+
+      - name: Check that README mentions key terms
+        run: |
+          set -e
+          for term in "Netralis" "ESP32" "pre-alpha" "Apache" \
+                      "Vertex AI" "netralis.ca"; do
+            if ! grep -q "$term" README.md; then
+              echo "✗ README.md missing required term: $term"
+              exit 1
+            fi
+            echo "✓ README mentions: $term"
+          done
